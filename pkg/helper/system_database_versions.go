@@ -57,8 +57,8 @@ func VerifySystemDatabase(k8sclient client.Client, reqConfigMap *v1.ConfigMap, a
 			return false, err
 		}
 	} else if strings.HasPrefix(dbConfig.URL, "oracle-enhanced://") {
-		logger.Info("Oracle system database discovered, bypassing version check")
-		return true, nil
+		logger.Info("Oracle system database not supported in 2.16.0")
+		return false, fmt.Errorf("Oracle database not supported in 2.16.0")
 	} else {
 		return false, fmt.Errorf("unsupported database")
 	}
